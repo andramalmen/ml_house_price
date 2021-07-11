@@ -1,7 +1,8 @@
 import { GET, Path } from 'typescript-rest';
 import mergeData from '../utils/mergeData';
-import saveData from '../utils/saveData';
 import saveCSV from '../utils/saveCSV';
+import saveData from '../utils/saveData';
+import serveCSV from '../utils/serveCSV';
 
 @Path('/v0/housedata')
 class HouseDataService {
@@ -24,6 +25,13 @@ class HouseDataService {
     public async saveCSV(): Promise<boolean> {
         await saveCSV();
         return true;
+    }
+
+    @GET
+    @Path('/serveCSV')
+    public async serveCSV() {
+        const csv = await serveCSV();
+        return csv;
     }
 }
 
